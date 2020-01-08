@@ -2,17 +2,18 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          4
+Release:          5
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
 URL:              http://mariadb.org
 
 Source0:          https://downloads.mariadb.org/interstitial/mariadb-%{version}/source/mariadb-%{version}.tar.gz
-Source1:          mariadb-server-galera.te
+
+Patch9000:        9000-disable-some-unstable-testcases.patch
 
 BuildRequires:    selinux-policy-devel, cmake, gcc-c++
-BuildRequires:    systemd, systemd-devel, multilib-rpm-config
+BuildRequires:    systemd, systemd-devel
 BuildRequires:    zlib-devel, lz4-devel, libaio-devel, libedit-devel, ncurses-devel
 BuildRequires:    systemtap-sdt-devel, bison, bison-devel, pam-devel
 BuildRequires:    pcre-devel >= 8.35 pkgconf
@@ -191,9 +192,6 @@ This contains test suitte for the developing of MariaDB.
 %autosetup -n %{name}-%{version} -p1
 find . -name "*.jar" -type f -exec rm --verbose -f {} \;
 
-mkdir selinux
-sed 's/mariadb-server-galera/%{name}-server-galera/' %{SOURCE1} > selinux/%{name}-server-galera.te
-
 pcre_maj=`grep '^m4_define(pcre_major' pcre/configure.ac | sed -r 's/^m4_define\(pcre_major, \[([0-9]+)\]\)/\1/'`
 pcre_min=`grep '^m4_define(pcre_minor' pcre/configure.ac | sed -r 's/^m4_define\(pcre_minor, \[([0-9]+)\]\)/\1/'`
 
@@ -282,14 +280,8 @@ cmake -L
 %make_build VERBOSE=1
 
 
-make -C selinux -f /usr/share/selinux/devel/Makefile %{name}-server-galera.pp
-
 %install
 %make_install
-
-
-%multilib_fix_c_header --file %{_includedir}/mysql/server/my_config.h
-%multilib_fix_c_header --file %{_includedir}/mysql/server/private/config.h
 
 ln -s mysql_config.1.gz %{buildroot}%{_mandir}/man1/mariadb_config.1.gz
 
@@ -314,10 +306,6 @@ rm %{buildroot}%{_sysconfdir}/init.d/mysql
 rm %{buildroot}%{_libexecdir}/rcmysql
 rm %{buildroot}%{_tmpfilesdir}/tmpfiles.conf
 echo "d %{_rundir}/%{name} 0755 mysql mysql -" >>%{buildroot}%{_tmpfilesdir}/%{name}.conf
-
-
-install -p -m 644 -D selinux/%{name}-server-galera.pp %{buildroot}%{_datadir}/selinux/packages/%{name}/%{name}-server-galera.pp
-
 
 mv %{buildroot}%{_datadir}/mysql-test/lib/My/SafeProcess/my_safe_process %{buildroot}%{_bindir}
 ln -s ../../../../../bin/my_safe_process %{buildroot}%{_datadir}/mysql-test/lib/My/SafeProcess/my_safe_process
@@ -408,7 +396,6 @@ export MTR_BUILD_THREAD=%{__isa_bits}
 semanage port -a -t mysqld_port_t -p tcp 4568 &> /dev/null || :
 semanage port -a -t mysqld_port_t -p tcp 4567 &> /dev/null || :
 semanage port -a -t mysqld_port_t -p udp 4567 &> /dev/null || :
-semodule -i %{_datadir}/selinux/packages/%{name}/%{name}-server-galera.pp &> /dev/null || :
 
 %post server
 %systemd_post %{name}.service
@@ -555,8 +542,6 @@ fi
 %{_bindir}/galera_new_cluster
 %{_bindir}/galera_recovery
 %{_datadir}/%{name}/systemd/use_galera_new_cluster.conf
-%{_datadir}/selinux/packages/%{name}/%{name}-server-galera.pp
-
 
 %files gssapi-server
 %config(noreplace) %{_sysconfdir}/my.cnf.d/auth_gssapi.cnf
@@ -611,6 +596,9 @@ fi
 
 
 %changelog
+* Wed Jan 8 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-5
+- Repackaged
+
 * Tue Dec 31 2019 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-4
 - Package rewrap and update the release number
 

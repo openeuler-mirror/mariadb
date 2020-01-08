@@ -1,0 +1,81 @@
+From ea4fbf5f164c60f736a5e987478dd1a4fc976371 Mon Sep 17 00:00:00 2001
+From: eulerstorage <eulerstorage@huawei.com>
+Date: Mon, 13 Jan 2020 17:35:50 +0800
+Subject: [PATCH] Disable some unstable testcase
+
+Some testcases are unstable, they will fail if the test environment
+is not suitable, for example network is broken.
+---
+ mysql-test/unstable-tests | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/mysql-test/unstable-tests b/mysql-test/unstable-tests
+index 2c28c9a..9ea0ebc 100644
+--- a/mysql-test/unstable-tests
++++ b/mysql-test/unstable-tests
+@@ -262,6 +262,7 @@ innodb.truncate_purge_debug                                        : Include fil
+ innodb.update_time                                                 : MDEV-14804 - Wrong result
+ innodb.undo_log                                                    : Include file modified in 10.2.17, 10.3.9
+ innodb.xa_recovery                                                 : MDEV-15279 - mysqld got exception
++innodb.innodb_defrag_binlog                                        :
+ 
+ #-----------------------------------------------------------------------
+ 
+@@ -389,6 +390,8 @@ main.mysql_upgrade_noengine                                        : MDEV-14355
+ main.mysql_upgrade_ssl                                             : MDEV-13492 - Unknown SSL error
+ main.olap                                                          : Modified in 10.3.8
+ main.openssl_1                                                     : MDEV-13492 - Unknown SSL error
++main.openssl_6975                                                  :
++main.ssl_cipher                                                    :
+ main.order_by_optimizer_innodb                                     : MDEV-10683 - Wrong result
+ main.partition_debug_sync                                          : MDEV-15669 - Deadlock found when trying to get lock
+ main.partition_innodb_plugin                                       : MDEV-12901 - Valgrind warnings
+@@ -418,6 +421,11 @@ main.ssl_ca                                                        : MDEV-10895
+ main.ssl_cert_verify                                               : MDEV-13735 - Server crash
+ main.ssl_connect                                                   : MDEV-13492 - Unknown SSL error
+ main.ssl_timeout                                                   : MDEV-11244 - Crash
++main.ssl_7937                                                      :
++main.ssl_crl_clients                                               :
++main.ssl_8k_key                                                    :
++main.ssl                                                           :
++main.ssl_cipher                                                    :
+ main.statistics_close                                              : Added in 10.3.8
+ main.statistics                                                    : Modified in 10.3.8
+ main.stat_tables                                                   : Modified in 10.1.35, 10.2.17, 10.3.9
+@@ -523,6 +531,7 @@ parts.partition_exch_qa_10                                         : MDEV-11765
+ parts.partition_innodb_status_file                                 : MDEV-12901 - Valgrind
+ parts.partition_special_innodb                                     : MDEV-16942 - Timeout
+ parts.truncate_locked                                              : Added in 10.1.35, 10.2.17, 10.3.9
++parts.partition_alter4_innodb                                      :
+ 
+ #-----------------------------------------------------------------------
+ 
+@@ -549,6 +558,9 @@ perfschema.stage_mdl_global                                        : MDEV-11803
+ perfschema.stage_mdl_procedure                                     : MDEV-11545 - Missing row
+ perfschema.stage_mdl_table                                         : MDEV-12638 - Wrong result
+ perfschema.threads_mysql                                           : MDEV-10677 - Wrong result
++perfschema.nesting                                                 :
++perfschema.socket_summary_by_instance_func                         :
++perfschema.cnf_option                                              :
+ 
+ #-----------------------------------------------------------------------
+ 
+@@ -716,6 +728,7 @@ rpl.rpl_temporary_error2                                           : MDEV-10634
+ rpl.sec_behind_master-5114                                         : MDEV-13878 - Wrong result
+ 
+ rpl/extra/rpl_tests.*                                              : MDEV-10994 - Not maintained
++rpl.rpl_connection                                                 :
+ 
+ #-----------------------------------------------------------------------
+ 
+@@ -769,6 +782,7 @@ sys_vars.slow_query_log_func                                       : MDEV-14273
+ sys_vars.sysvars_innodb                                            : Modified in 10.3.8
+ sys_vars.thread_cache_size_func                                    : MDEV-11775 - Wrong result
+ sys_vars.wait_timeout_func                                         : MDEV-12896 - Wrong result
++sys_vars.slave_parallel_threads_basic                              :
+ 
+ #-----------------------------------------------------------------------
+ 
+-- 
+1.8.3.1
+
