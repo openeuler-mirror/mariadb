@@ -2,7 +2,7 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          5
+Release:          6
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -41,7 +41,6 @@ engines, plugins and many other tools make it very versatile for a wide variety 
 
 %package          common
 Summary:          It including share config files used by client and server
-Requires:         %{_sysconfdir}/my.cnf
 Provides:         mariadb-galera-common = %{epoch}:%{version}-%{release}
 Obsoletes:        %{name}-libs <= %{epoch}:%{version}-%{release}
 
@@ -325,6 +324,7 @@ chmod 644 %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
 sed -i -r 's|^wsrep_provider=none|wsrep_provider=%{_libdir}/galera/libgalera_smm.so|' support-files/wsrep.cnf
 install -p -m 0644 support-files/wsrep.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/galera.cnf
+install -D -p -m 0644 support-files/rpm/my.cnf %{buildroot}%{_sysconfdir}/my.cnf
 mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
 touch %{buildroot}%{_sysconfdir}/sysconfig/clustercheck
 
@@ -351,7 +351,6 @@ rm -r %{buildroot}%{_includedir}/mysql/{mariadb,mysql}
 
 
 rm %{buildroot}%{_mandir}/man1/tokuft*
-rm %{buildroot}%{_sysconfdir}/my.cnf
 rm -r %{buildroot}%{_datadir}/sql-bench
 
 
@@ -451,6 +450,7 @@ fi
 %files common
 %doc %{_defaultdocdir}/%{name}
 %dir %{_datadir}/%{name}
+%config(noreplace) %{_sysconfdir}/my.cnf
 %{_datadir}/%{name}/charsets
 
 %files errmessage
@@ -596,6 +596,9 @@ fi
 
 
 %changelog
+* Wed Jan 15 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-6
+- Add my.cnf file
+
 * Wed Jan 8 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-5
 - Repackaged
 
