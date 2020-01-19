@@ -1,0 +1,25 @@
+From 22caf578e446809de75555ec8252f09da50c8db1 Mon Sep 17 00:00:00 2001
+From: eulerstorage <eulerstorage@huawei.com>
+Date: Sun, 19 Jan 2020 22:54:38 +0800
+Subject: [PATCH] add mysql install db command
+
+---
+ support-files/mariadb.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/support-files/mariadb.service.in b/support-files/mariadb.service.in
+index 8d43b6d..56ccb1a 100644
+--- a/support-files/mariadb.service.in
++++ b/support-files/mariadb.service.in
+@@ -73,7 +73,7 @@ ExecStartPre=/bin/sh -c "[ ! -e @bindir@/galera_recovery ] && VAR= || \
+  && systemctl set-environment _WSREP_START_POSITION=$VAR || exit 1"
+ 
+ # Needed to create system tables etc.
+-# ExecStartPre=@scriptdir@/mysql_install_db -u mysql
++ExecStartPre=@scriptdir@/mysql_install_db --user="mysql" --skip-test-db
+ 
+ # Start main service
+ # MYSQLD_OPTS here is for users to set in /etc/systemd/system/mariadb.service.d/MY_SPECIAL.conf
+-- 
+1.8.3.1
+
