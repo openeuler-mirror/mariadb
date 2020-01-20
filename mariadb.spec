@@ -2,7 +2,7 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          6
+Release:          7
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -11,6 +11,7 @@ URL:              http://mariadb.org
 Source0:          https://downloads.mariadb.org/interstitial/mariadb-%{version}/source/mariadb-%{version}.tar.gz
 
 Patch9000:        9000-disable-some-unstable-testcases.patch
+Patch9001:        9001-add-install-db-command.patch
 
 BuildRequires:    selinux-policy-devel, cmake, gcc-c++
 BuildRequires:    systemd, systemd-devel
@@ -596,6 +597,9 @@ fi
 
 
 %changelog
+* Sun Jan 19 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-7
+- Add mysql_install_db command in service file
+
 * Wed Jan 15 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-6
 - Add my.cnf file
 
