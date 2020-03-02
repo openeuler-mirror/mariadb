@@ -2,7 +2,7 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          7
+Release:          8
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -33,6 +33,7 @@ Requires:         mariadb-connector-c >= 3.0
 Suggests:         %{name}-server%{?_isa} = %{epoch}:%{version}-%{release}
 Provides:         mariadb-galera = %{epoch}:%{version}-%{release}
 
+%global __requires_exclude ^perl\\((hostnames|lib::mtr|lib::v1|mtr_|My::)
 
 %description
 MariaDB turns data into structured information in a wide array of applications,
@@ -597,6 +598,9 @@ fi
 
 
 %changelog
+* Mon Mar 2 2020 steven <steven_ygui@163.com> - 3:10.3.9-8
+- Add requires exclude for perls
+
 * Sun Jan 19 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-7
 - Add mysql_install_db command in service file
 
