@@ -1,0 +1,38 @@
+From bc8fd081680454b6b29cac8feb6774fd60b37eb5 Mon Sep 17 00:00:00 2001
+From: eulerstorage <eulerstorage@huawei.com>
+Date: Tue, 3 Mar 2020 17:24:08 +0800
+Subject: [PATCH] skip some unstable test cases
+
+---
+ mysql-test/unstable-tests | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/mysql-test/unstable-tests b/mysql-test/unstable-tests
+index 9ea0ebc..99a328b 100644
+--- a/mysql-test/unstable-tests
++++ b/mysql-test/unstable-tests
+@@ -41,6 +41,7 @@ binlog.binlog_flush_binlogs_delete_domain                          : MDEV-14431
+ binlog.binlog_killed                                               : MDEV-12925 - Wrong result
+ binlog.binlog_tmp_table_row                                        : Added in 10.1.35, 10.2.17
+ binlog.binlog_xa_recover                                           : MDEV-8517 - Extra checkpoint
++binlog.binlog_mysqlbinlog2                                         : Skip on ARM
+ binlog.load_data_stm_view                                          : MDEV-16948 - Wrong result
+ binlog_tmp_table_row                                               : Added in 10.3.9
+ 
+@@ -346,11 +347,13 @@ main.events_2                                                      : MDEV-13277
+ main.events_bugs                                                   : MDEV-12892 - Crash
+ main.events_restart                                                : MDEV-12236 - Server shutdown problem
+ main.events_slowlog                                                : MDEV-12821 - Wrong result
++main.events_1                                                      : Skip on ARM
+ main.explain_slowquerylog                                          : Modified in 10.2.16
+ main.func_json                                                     : Modified in 10.3.9
+ main.func_misc                                                     : Modified in 10.3.8
+ main.func_time_hires                                               : Modified in 10.3.8
+ main.func_time                                                     : Modified in 10.3.9
++main.func_like                                                     : Skip on ARM
+ main.gis                                                           : MDEV-13411 - wrong result on P8
+ main.grant2                                                        : Modified in 10.3.8
+ main.grant                                                         : Modified in 10.3.9
+-- 
+1.8.3.1
+

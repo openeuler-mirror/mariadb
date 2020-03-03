@@ -10,8 +10,9 @@ URL:              http://mariadb.org
 
 Source0:          https://downloads.mariadb.org/interstitial/mariadb-%{version}/source/mariadb-%{version}.tar.gz
 
-Patch9000:        9000-disable-some-unstable-testcases.patch
-Patch9001:        9001-add-install-db-command.patch
+Patch0001:        disable-some-unstable-testcases.patch
+Patch0002:        add-install-db-command.patch
+Patch0003:        disable-some-unstable-testcases-2.patch
 
 BuildRequires:    selinux-policy-devel, cmake, gcc-c++
 BuildRequires:    systemd, systemd-devel
@@ -599,7 +600,7 @@ fi
 
 %changelog
 * Mon Mar 2 2020 steven <steven_ygui@163.com> - 3:10.3.9-8
-- Add requires exclude for perls
+- Add requires exclude for perls and skip some test cases
 
 * Sun Jan 19 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-7
 - Add mysql_install_db command in service file
