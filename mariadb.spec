@@ -2,7 +2,7 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          8
+Release:          9
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -31,6 +31,7 @@ BuildRequires:    perl(Sys::Hostname), perl(Test::More), perl(Time::HiRes), perl
 Requires:         grep, bash, coreutils
 Requires:         %{name}-common%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:         mariadb-connector-c >= 3.0
+Conflicts:        mysql
 Suggests:         %{name}-server%{?_isa} = %{epoch}:%{version}-%{release}
 Provides:         mariadb-galera = %{epoch}:%{version}-%{release}
 
@@ -599,6 +600,9 @@ fi
 
 
 %changelog
+* Fri Jul 3 2020 jinzhimin<jinzhimin2@huawei.com> -3:10.3.9-9
+- Add conflict between mysql
+
 * Mon Mar 2 2020 steven <steven_ygui@163.com> - 3:10.3.9-8
 - Add requires exclude for perls and skip some test cases
 
