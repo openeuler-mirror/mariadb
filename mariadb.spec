@@ -2,7 +2,7 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          8
+Release:          9
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -599,6 +599,9 @@ fi
 
 
 %changelog
+* Thu Aug 18 2020 xinghe <xinghe1@huawei.com> - 3:10.3.9-9
+- Add release version for update
+
 * Mon Mar 2 2020 steven <steven_ygui@163.com> - 3:10.3.9-8
 - Add requires exclude for perls and skip some test cases
 
