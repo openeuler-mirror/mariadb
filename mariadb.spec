@@ -2,13 +2,13 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          10
+Release:          11
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
 URL:              http://mariadb.org
 
-Source0:          https://downloads.mariadb.org/interstitial/mariadb-%{version}/source/mariadb-%{version}.tar.gz
+Source0:          https://downloads.mariadb.com/MariaDB/mariadb-%{version}/source/mariadb-%{version}.tar.gz
 
 Patch0:        0000-disable-some-unstable-testcases.patch
 Patch1:        0001-add-install-db-command.patch
@@ -600,6 +600,9 @@ fi
 
 
 %changelog
+* Tue Sep 8 2020 lihaotian<lihaotian9@huawei.com> -3:10.3.9-11
+- Update the source0 url
+
 * Fri Jul 10 2020 volcanodragon<linfeilong@huawei.com> -3:10.3.9-10
 - Rename patch names
 
