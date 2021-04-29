@@ -2,7 +2,7 @@
 
 Name:             mariadb
 Version:          10.3.9
-Release:          11
+Release:          12
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -13,6 +13,7 @@ Source0:          https://downloads.mariadb.com/MariaDB/mariadb-%{version}/sourc
 Patch0:        0000-disable-some-unstable-testcases.patch
 Patch1:        0001-add-install-db-command.patch
 Patch2:        0002-disable-some-unstable-testcases-2.patch
+Patch3:        CVE-2021-27928.patch
 
 BuildRequires:    selinux-policy-devel, cmake, gcc-c++
 BuildRequires:    systemd, systemd-devel
@@ -600,6 +601,9 @@ fi
 
 
 %changelog
+* Mon Apr 26 2021 bzhaoop<bzhaojyathousandy@gmail.com> -3:10.3.9-12
+- Fix CVE-2021-27928
+
 * Tue Sep 8 2020 lihaotian<lihaotian9@huawei.com> -3:10.3.9-11
 - Update the source0 url
 
