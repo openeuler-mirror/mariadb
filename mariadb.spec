@@ -1477,3 +1477,30 @@ fi
 * Wed Jun 16 2021 bzhaoop<bzhaojyathousandy@gmail.com> -4:10.5.10-1
 - Package init for new version 10.5.10
 
+* Tue Sep 8 2020 lihaotian<lihaotian9@huawei.com> -3:10.3.9-11
+- Update the source0 url
+
+* Fri Jul 10 2020 volcanodragon<linfeilong@huawei.com> -3:10.3.9-10
+- Rename patch names
+
+* Fri Jul 3 2020 jinzhimin<jinzhimin2@huawei.com> -3:10.3.9-9
+- Add conflict between mysql
+
+* Mon Mar 2 2020 steven <steven_ygui@163.com> - 3:10.3.9-8
+- Add requires exclude for perls and skip some test cases
+
+* Sun Jan 19 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-7
+- Add mysql_install_db command in service file
+
+* Wed Jan 15 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-6
+- Add my.cnf file
+
+* Wed Jan 8 2020 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-5
+- Repackaged
+
+* Tue Dec 31 2019 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-4
+- Package rewrap and update the release number
+
+* Wed Sep 11 2019 openEuler Buildteam <buildteam@openeuler.org> - 3:10.3.9-3
+- Package init
+
