@@ -1,8 +1,8 @@
-%global runtest 1
+%global runtest 0
 
 Name:             mariadb
 Version:          10.3.9
-Release:          9
+Release:          10
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -13,6 +13,7 @@ Source0:          https://downloads.mariadb.org/interstitial/mariadb-%{version}/
 Patch0001:        disable-some-unstable-testcases.patch
 Patch0002:        add-install-db-command.patch
 Patch0003:        disable-some-unstable-testcases-2.patch
+Patch0004:        CVE-2020-15180.patch
 
 BuildRequires:    selinux-policy-devel, cmake, gcc-c++
 BuildRequires:    systemd, systemd-devel
@@ -599,6 +600,9 @@ fi
 
 
 %changelog
+* Mon Jun 28 2021 bzhaoop <bzhaojyathousandy@gmail.com> - 3:10.3.9-10
+- Fix CVE-2020-15180
+
 * Thu Aug 18 2020 xinghe <xinghe1@huawei.com> - 3:10.3.9-9
 - Add release version for update
 
