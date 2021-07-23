@@ -74,7 +74,7 @@
 
 Name:             mariadb
 Version:          10.5.10
-Release:          1
+Release:          2
 Epoch:            4
 
 Summary:          A very fast and robust SQL database server
@@ -187,7 +187,6 @@ BuildRequires:    openssl openssl-devel
 %if %{with debug}
 BuildRequires:    valgrind-devel
 %endif
-BuildRequires:    gdb
 
 Requires:         bash coreutils grep
 
@@ -1474,6 +1473,9 @@ fi
 %endif
 
 %changelog
+* Fri Jul 23 2021 zhouwenpei<zhouwenpei1@gmail.com> -4:10.5.10-2
+- remove unnecessary build require.
+
 * Wed Jun 16 2021 bzhaoop<bzhaojyathousandy@gmail.com> -4:10.5.10-1
 - Package init for new version 10.5.10
 
