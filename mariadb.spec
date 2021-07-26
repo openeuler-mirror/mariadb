@@ -1,6 +1,6 @@
 %global pkg_name %{name}
 %global pkgnamepatch mariadb
-%{!?runselftest:%global runselftest 1}
+%{!?runselftest:%global runselftest 0}
 %global ignore_testsuite_result 0
 %global last_tested_version 10.5.10
 %global force_run_testsuite 0
@@ -74,7 +74,7 @@
 
 Name:             mariadb
 Version:          10.5.10
-Release:          2
+Release:          3
 Epoch:            4
 
 Summary:          A very fast and robust SQL database server
@@ -769,7 +769,7 @@ CXXFLAGS="$CFLAGS"
 CPPFLAGS="$CFLAGS"
 export CFLAGS CXXFLAGS CPPFLAGS
 
-%make_build -j7
+%make_build %{?_smp_mflags}
 
 # build selinux policy
 %if %{with galera}
@@ -1473,6 +1473,9 @@ fi
 %endif
 
 %changelog
+* Mon Jul 26 2021 bzhaoop<bzhaojyathousandy@gmail.com> -4:10.5.10-3
+- Disable execute testing during rpm packaging for increasing performance.
+
 * Fri Jul 23 2021 zhouwenpei<zhouwenpei1@gmail.com> -4:10.5.10-2
 - remove unnecessary build require.
 
