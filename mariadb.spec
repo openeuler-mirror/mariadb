@@ -1,8 +1,8 @@
-%global runtest 1
+%global runtest 0
 
 Name:             mariadb
 Version:          10.3.9
-Release:          9
+Release:          10
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -279,7 +279,7 @@ export CFLAGS CXXFLAGS
 
 cmake -L
 
-%make_build VERBOSE=1
+%make_build VERBOSE=1 %{?_smp_mflags}
 
 
 %install
@@ -599,6 +599,9 @@ fi
 
 
 %changelog
+* Tue Jul 27 2021 bzhaoop <bzhaojyathousandy@gmail.com> -3:10.3.9-10
+- Increase the build speed
+
 * Thu Aug 18 2020 xinghe <xinghe1@huawei.com> - 3:10.3.9-9
 - Add release version for update
 
