@@ -1,8 +1,8 @@
-%global runtest 1
+%global runtest 0
 
 Name:             mariadb
 Version:          10.3.9
-Release:          12
+Release:          13
 Epoch:            3
 Summary:          One of the most popular database servers
 License:          GPLv2 with exceptions and LGPLv2 and BSD
@@ -281,7 +281,7 @@ export CFLAGS CXXFLAGS
 
 cmake -L
 
-%make_build VERBOSE=1
+%make_build VERBOSE=1 %{?_smp_mflags}
 
 
 %install
@@ -601,6 +601,9 @@ fi
 
 
 %changelog
+* Tue Jul 27 2021 bzhaoop<bzhaojyathousandy@gmail.com> -3:10.3.9-13
+- Increase the build speed
+
 * Mon Apr 26 2021 bzhaoop<bzhaojyathousandy@gmail.com> -3:10.3.9-12
 - Fix CVE-2021-27928
 
