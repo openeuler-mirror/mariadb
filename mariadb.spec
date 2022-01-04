@@ -15,7 +15,7 @@
 %bcond_with mroonga
 %bcond_with rocksdb
 %endif
-%ifarch aarch64
+%ifarch aarch64 riscv64
 %bcond_without mroonga
 %bcond_without rocksdb
 %endif
@@ -74,7 +74,7 @@
 
 Name:             mariadb
 Version:          10.5.10
-Release:          3
+Release:          4
 Epoch:            4
 
 Summary:          A very fast and robust SQL database server
@@ -638,7 +638,7 @@ rm -r storage/rocksdb/
 cat %{SOURCE50} | tee -a mysql-test/unstable-tests
 
 # disable some tests failing on different architectures
-%ifarch %{arm} aarch64
+%ifarch %{arm} aarch64 riscv64
 cat %{SOURCE51} | tee -a mysql-test/unstable-tests
 %endif
 
@@ -1057,6 +1057,10 @@ export MTR_BUILD_THREAD=$(( $(date +%s) % 1100 ))
   cd %{buildroot}%{_datadir}/mysql-test
 
   export common_testsuite_arguments=" --parallel=auto --force --retry=2 --suite-timeout=900 --testcase-timeout=30 --mysqld=--binlog-format=mixed --force-restart --shutdown-timeout=60 --max-test-fail=5 "
+  
+%ifarch riscv64
+  export common_testsuite_arguments=" --parallel=auto --force --retry=2 --suite-timeout=4500 --testcase-timeout=150 --mysqld=--binlog-format=mixed --force-restart --shutdown-timeout=300 --max-test-fail=5 "
+%endif
 
   # If full testsuite has already been run on this version and we don't explicitly want the full testsuite to be run
   if [[ "%{last_tested_version}" == "%{version}" ]] && [[ %{force_run_testsuite} -eq 0 ]]
@@ -1473,6 +1477,9 @@ fi
 %endif
 
 %changelog
+* Tue Dec 21 2021 mc964203886 <machi@iscas.ac.cn> -4:10.5.10-4
+- Spec:fix unstable-tests for riscv64
+
 * Mon Jul 26 2021 bzhaoop<bzhaojyathousandy@gmail.com> -4:10.5.10-3
 - Disable execute testing during rpm packaging for increasing performance.
 
